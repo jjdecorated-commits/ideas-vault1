@@ -9,38 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #13131a;
-    --surface2: #1c1c27;
-    --border: #2a2a3d;
-    --accent: #7c6aff;
-    --text: #e8e8f0;
-    --muted: #6b6b8a;
-    --green: #4fffb0;
-    --red: #ff4f6a;
-    --ht: #ff9f43;
-    --ht-bg: rgba(255,159,67,0.12);
-    --sx: #7c6aff;
-    --sx-bg: rgba(124,106,255,0.12);
-    --qt: #4fffb0;
-    --qt-bg: rgba(79,255,176,0.12);
-    --other: #6b6b8a;
-    --other-bg: rgba(107,107,138,0.12);
+    --bg: #0a0a0f; --surface: #13131a; --surface2: #1c1c27; --border: #2a2a3d;
+    --accent: #7c6aff; --text: #e8e8f0; --muted: #6b6b8a;
+    --green: #4fffb0; --red: #ff4f6a;
+    --ht: #ff9f43; --ht-bg: rgba(255,159,67,0.12);
+    --sx: #7c6aff; --sx-bg: rgba(124,106,255,0.12);
+    --qt: #4fffb0; --qt-bg: rgba(79,255,176,0.12);
+    --other: #6b6b8a; --other-bg: rgba(107,107,138,0.12);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    min-height: 100vh;
-  }
+  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; min-height: 100vh; }
   .app { max-width: 480px; margin: 0 auto; padding: 0 0 90px; }
 
-  header {
-    padding: 24px 20px 16px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-  }
+  header { padding: 24px 20px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
   .logo { font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
   .logo-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease infinite; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
@@ -54,55 +35,31 @@
   .screen.active { display: block; }
 
   .record-area { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 32px 0 24px; }
-
   .timer { font-family: 'Space Mono', monospace; font-size: 36px; font-weight: 700; color: var(--text); letter-spacing: 3px; }
 
-  .record-btn {
-    width: 88px; height: 88px; border-radius: 50%;
-    border: 1px solid var(--border);
-    background: var(--surface2);
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    position: relative; transition: all 0.2s; outline: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .record-btn::after {
-    content: ''; position: absolute; inset: -6px; border-radius: 50%;
-    border: 1.5px solid var(--border); transition: all 0.3s;
-  }
+  .record-btn { width: 88px; height: 88px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface2); cursor: pointer; display: flex; align-items: center; justify-content: center; position: relative; transition: all 0.2s; outline: none; -webkit-tap-highlight-color: transparent; }
+  .record-btn::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 1.5px solid var(--border); transition: all 0.3s; }
   .record-btn.rec::after { border-color: var(--red); animation: ring 1.4s ease infinite; }
   @keyframes ring { 0%,100%{inset:-6px;opacity:1} 50%{inset:-12px;opacity:0.3} }
   .record-btn.rec { background: rgba(255,79,106,0.12); border-color: var(--red); }
   .record-btn:active { transform: scale(0.95); }
 
-  .mic-icon, .stop-icon { pointer-events: none; }
-
-  .rec-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
-  .rec-label.on { color: var(--red); }
-
   .wave { display: flex; align-items: center; gap: 3px; height: 36px; opacity: 0; transition: opacity 0.3s; }
   .wave.on { opacity: 1; }
   .wb { width: 3px; border-radius: 2px; background: var(--red); height: 4px; transition: height 0.1s; }
+  .rec-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+  .rec-label.on { color: var(--red); }
+  .sr-status { font-size: 12px; color: var(--muted); text-align: center; min-height: 18px; }
+  .sr-status.on { color: var(--accent); }
 
   .label { font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-
   .transcript-wrap { margin-bottom: 16px; }
-  textarea {
-    width: 100%; background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; padding: 14px; font-family: 'Space Mono', monospace;
-    font-size: 13px; line-height: 1.7; color: var(--text); resize: none;
-    outline: none; transition: border-color 0.2s;
-  }
+  textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; font-family: 'Space Mono', monospace; font-size: 13px; line-height: 1.7; color: var(--text); resize: none; outline: none; transition: border-color 0.2s; }
   textarea:focus { border-color: var(--accent); }
 
   .proj-wrap { margin-bottom: 16px; }
   .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .proj-btn {
-    padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border);
-    background: var(--surface); cursor: pointer; font-family: 'Syne', sans-serif;
-    font-size: 13px; font-weight: 700; color: var(--muted);
-    display: flex; align-items: center; gap: 8px;
-    transition: all 0.15s; -webkit-tap-highlight-color: transparent;
-  }
+  .proj-btn { padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--muted); display: flex; align-items: center; gap: 8px; transition: all 0.15s; -webkit-tap-highlight-color: transparent; }
   .proj-btn:active { transform: scale(0.97); }
   .proj-btn.sel-ht { background: var(--ht-bg); border-color: var(--ht); color: var(--ht); }
   .proj-btn.sel-sx { background: var(--sx-bg); border-color: var(--sx); color: var(--sx); }
@@ -112,20 +69,10 @@
 
   .md-wrap { margin-bottom: 16px; display: none; }
   .md-wrap.on { display: block; }
-  .md-box {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-    padding: 14px; font-family: 'Space Mono', monospace; font-size: 12px;
-    line-height: 1.8; color: var(--text); white-space: pre-wrap; word-break: break-word;
-    max-height: 180px; overflow-y: auto;
-  }
+  .md-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.8; color: var(--text); white-space: pre-wrap; word-break: break-word; max-height: 180px; overflow-y: auto; }
 
   .btn-row { display: flex; gap: 8px; }
-  .btn {
-    flex: 1; padding: 14px; border-radius: 10px; border: 1px solid var(--border);
-    background: var(--surface2); color: var(--text); font-family: 'Syne', sans-serif;
-    font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s;
-    -webkit-tap-highlight-color: transparent;
-  }
+  .btn { flex: 1; padding: 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s; -webkit-tap-highlight-color: transparent; }
   .btn:active { opacity: 0.8; transform: scale(0.98); }
   .btn.copy { background: var(--green); color: #0a0a0f; border-color: var(--green); }
   .btn:disabled { opacity: 0.35; cursor: not-allowed; }
@@ -149,7 +96,6 @@
   .nbtn.g { color: var(--green); border-color: rgba(79,255,176,0.3); }
 
   .empty { text-align: center; padding: 50px 20px; color: var(--muted); font-size: 14px; }
-
   .toast { position: fixed; bottom: 96px; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--green); color: #0a0a0f; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 700; opacity: 0; transition: all 0.25s; z-index: 999; white-space: nowrap; pointer-events: none; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
@@ -159,9 +105,6 @@
   .nav-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); }
   .nav-item.active .nav-lbl { color: var(--accent); }
   .cnt { display: inline-block; background: var(--accent); color: white; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 10px; margin-left: 4px; }
-
-  .sr-status { font-size: 12px; color: var(--muted); text-align: center; min-height: 18px; margin-top: -8px; }
-  .sr-status.listening { color: var(--accent); }
 </style>
 </head>
 <body>
@@ -170,7 +113,6 @@
     <div class="logo"><div class="logo-dot"></div>Ideas Vault</div>
     <div class="date" id="dateLbl"></div>
   </header>
-
   <div class="tabs">
     <div class="tab active" onclick="goTab('rec')">Nagraj</div>
     <div class="tab" onclick="goTab('hist')">Historia <span class="cnt" id="cnt">0</span></div>
@@ -180,13 +122,13 @@
     <div class="record-area">
       <div class="timer" id="timer">0:00</div>
       <button class="record-btn" id="recBtn" onclick="toggleRec()">
-        <svg class="mic-icon" id="micSvg" width="32" height="32" viewBox="0 0 24 24" fill="none">
+        <svg id="micSvg" width="32" height="32" viewBox="0 0 24 24" fill="none">
           <rect x="9" y="2" width="6" height="12" rx="3" fill="#7c6aff"/>
           <path d="M5 10a7 7 0 0014 0" stroke="#7c6aff" stroke-width="2" stroke-linecap="round"/>
           <line x1="12" y1="17" x2="12" y2="21" stroke="#7c6aff" stroke-width="2" stroke-linecap="round"/>
           <line x1="9" y1="21" x2="15" y2="21" stroke="#7c6aff" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        <svg class="stop-icon" id="stopSvg" width="32" height="32" viewBox="0 0 24 24" fill="none" style="display:none">
+        <svg id="stopSvg" width="32" height="32" viewBox="0 0 24 24" fill="none" style="display:none">
           <rect x="6" y="6" width="12" height="12" rx="2" fill="#ff4f6a"/>
         </svg>
       </button>
@@ -207,30 +149,19 @@
         <div class="label">Transkrypcja — sprawdź i popraw</div>
         <textarea id="txBox" rows="5" placeholder="Tutaj pojawi się tekst..."></textarea>
       </div>
-
       <div class="proj-wrap">
         <div class="label">Wybierz projekt</div>
         <div class="proj-grid">
-          <button class="proj-btn" data-p="HameTradie" data-c="ht" onclick="pickProj(this)">
-            <div class="pdot" style="background:#ff9f43"></div>HameTradie
-          </button>
-          <button class="proj-btn" data-p="SuperX" data-c="sx" onclick="pickProj(this)">
-            <div class="pdot" style="background:#7c6aff"></div>SuperX
-          </button>
-          <button class="proj-btn" data-p="Quoter" data-c="qt" onclick="pickProj(this)">
-            <div class="pdot" style="background:#4fffb0"></div>Quoter
-          </button>
-          <button class="proj-btn" data-p="Inne" data-c="other" onclick="pickProj(this)">
-            <div class="pdot" style="background:#6b6b8a"></div>Inne
-          </button>
+          <button class="proj-btn" data-p="HameTradie" data-c="ht" onclick="pickProj(this)"><div class="pdot" style="background:#ff9f43"></div>HameTradie</button>
+          <button class="proj-btn" data-p="SuperX" data-c="sx" onclick="pickProj(this)"><div class="pdot" style="background:#7c6aff"></div>SuperX</button>
+          <button class="proj-btn" data-p="Quoter" data-c="qt" onclick="pickProj(this)"><div class="pdot" style="background:#4fffb0"></div>Quoter</button>
+          <button class="proj-btn" data-p="Inne" data-c="other" onclick="pickProj(this)"><div class="pdot" style="background:#6b6b8a"></div>Inne</button>
         </div>
       </div>
-
       <div class="md-wrap" id="mdWrap">
         <div class="label">Markdown dla Obsidian</div>
         <div class="md-box" id="mdBox"></div>
       </div>
-
       <div class="btn-row">
         <button class="btn" onclick="resetAll()">Nowe nagranie</button>
         <button class="btn copy" id="copyBtn" onclick="saveAndCopy()" disabled>Kopiuj Markdown</button>
@@ -259,13 +190,14 @@
 
 <script>
 let isRec = false, timerInt = null, waveInt = null, secs = 0;
-let recognition = null, finalText = '', interimText = '';
+let recognition = null;
+let committedText = '';
 let selProj = '', selCls = '';
 let notes = [];
+try { notes = JSON.parse(localStorage.getItem('iv3_notes') || '[]'); } catch(e) { notes = []; }
 
-try { notes = JSON.parse(localStorage.getItem('iv2_notes') || '[]'); } catch(e) { notes = []; }
-
-document.getElementById('dateLbl').textContent = new Date().toLocaleDateString('pl-PL', {day:'numeric',month:'short',year:'numeric'});
+document.getElementById('dateLbl').textContent =
+  new Date().toLocaleDateString('pl-PL', {day:'numeric', month:'short', year:'numeric'});
 updCnt();
 
 function goTab(t) {
@@ -273,75 +205,57 @@ function goTab(t) {
   document.querySelectorAll('.tab').forEach(tb => tb.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('screen-' + t).classList.add('active');
-  if (t === 'rec') {
-    document.querySelectorAll('.tab')[0].classList.add('active');
-    document.querySelectorAll('.nav-item')[0].classList.add('active');
-  } else {
-    document.querySelectorAll('.tab')[1].classList.add('active');
-    document.querySelectorAll('.nav-item')[1].classList.add('active');
-    renderHist();
-  }
+  const idx = t === 'rec' ? 0 : 1;
+  document.querySelectorAll('.tab')[idx].classList.add('active');
+  document.querySelectorAll('.nav-item')[idx].classList.add('active');
+  if (t === 'hist') renderHist();
 }
 
-function toggleRec() {
-  if (!isRec) startRec(); else stopRec();
-}
+function toggleRec() { if (!isRec) startRec(); else stopRec(); }
 
 function startRec() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) {
-    showErr('Twoja przeglądarka nie obsługuje rozpoznawania mowy. Użyj Chrome na Androidzie.');
-    return;
-  }
+  if (!SR) { showErr('Użyj Chrome na Androidzie — ta przeglądarka nie obsługuje rozpoznawania mowy.'); return; }
 
-  finalText = ''; interimText = '';
+  committedText = '';
+  document.getElementById('txBox').value = '';
+
   recognition = new SR();
   recognition.lang = 'pl-PL';
-  recognition.continuous = true;
+  recognition.continuous = false;
   recognition.interimResults = true;
   recognition.maxAlternatives = 1;
 
-  recognition.onstart = () => {
-    document.getElementById('srStatus').textContent = 'Słucham...';
-    document.getElementById('srStatus').classList.add('listening');
-  };
+  recognition.onstart = () => setStatus('Słucham...', true);
 
   recognition.onresult = (e) => {
-    interimText = '';
+    let newFinal = '', interim = '';
     for (let i = e.resultIndex; i < e.results.length; i++) {
-      if (e.results[i].isFinal) {
-        finalText += e.results[i][0].transcript + ' ';
-      } else {
-        interimText += e.results[i][0].transcript;
-      }
+      if (e.results[i].isFinal) newFinal += e.results[i][0].transcript;
+      else interim += e.results[i][0].transcript;
     }
-    document.getElementById('txBox').value = (finalText + interimText).trim();
+    if (newFinal) committedText += newFinal + ' ';
+    document.getElementById('txBox').value = (committedText + interim).trim();
   };
 
   recognition.onerror = (e) => {
-    if (e.error === 'not-allowed') {
-      showErr('Brak dostępu do mikrofonu. Zezwól w ustawieniach Chrome.');
-      stopRec();
-    } else if (e.error === 'no-speech') {
-      document.getElementById('srStatus').textContent = 'Nic nie słyszę — mów bliżej...';
-    }
+    if (e.error === 'not-allowed') { showErr('Brak dostępu do mikrofonu. Zezwól w ustawieniach Chrome.'); forceStop(); }
+    else if (e.error === 'no-speech') setStatus('Nic nie słyszę — mów bliżej...', false);
+    else if (e.error === 'network') setStatus('Błąd sieci.', false);
   };
 
   recognition.onend = () => {
+    // Kluczowa poprawka: sprawdzamy flagę PRZED restartem
+    // isRec jest ustawiane na false w stopRec() zanim recognition.stop() zostanie wywołane
+    // więc restart nastąpi tylko gdy użytkownik NADAL nagrywa
     if (isRec) {
-      try { recognition.start(); } catch(e) {}
+      try { recognition.start(); setStatus('Słucham...', true); } catch(e) {}
     }
   };
 
-  try {
-    recognition.start();
-  } catch(e) {
-    showErr('Nie można uruchomić mikrofonu: ' + e.message);
-    return;
-  }
+  try { recognition.start(); } catch(e) { showErr('Nie można uruchomić mikrofonu.'); return; }
 
-  isRec = true;
-  secs = 0;
+  isRec = true; secs = 0;
   document.getElementById('recBtn').classList.add('rec');
   document.getElementById('micSvg').style.display = 'none';
   document.getElementById('stopSvg').style.display = 'block';
@@ -353,31 +267,27 @@ function startRec() {
 
   timerInt = setInterval(() => {
     secs++;
-    const m = Math.floor(secs/60), s = secs % 60;
-    document.getElementById('timer').textContent = m + ':' + String(s).padStart(2,'0');
+    document.getElementById('timer').textContent =
+      Math.floor(secs/60) + ':' + String(secs%60).padStart(2,'0');
   }, 1000);
 
   waveInt = setInterval(() => {
-    document.querySelectorAll('.wb').forEach(b => {
-      b.style.height = (Math.random() * 26 + 4) + 'px';
-    });
+    document.querySelectorAll('.wb').forEach(b => { b.style.height = (Math.random()*26+4)+'px'; });
   }, 110);
 }
 
-function stopRec() {
+function forceStop() {
   isRec = false;
+  if (recognition) { try { recognition.abort(); } catch(e) {} recognition = null; }
+  clearInterval(timerInt); clearInterval(waveInt);
+  resetBtnUI();
+}
+
+function stopRec() {
+  isRec = false; // NAJPIERW flaga — blokuje restart w onend
   if (recognition) { try { recognition.stop(); } catch(e) {} recognition = null; }
   clearInterval(timerInt); clearInterval(waveInt);
-  document.getElementById('recBtn').classList.remove('rec');
-  document.getElementById('micSvg').style.display = 'block';
-  document.getElementById('stopSvg').style.display = 'none';
-  document.getElementById('recLbl').textContent = 'naciśnij aby nagrać';
-  document.getElementById('recLbl').classList.remove('on');
-  document.getElementById('wave').classList.remove('on');
-  document.getElementById('srStatus').textContent = '';
-  document.getElementById('srStatus').classList.remove('listening');
-  document.querySelectorAll('.wb').forEach(b => b.style.height = '4px');
-
+  resetBtnUI();
   selProj = ''; selCls = '';
   document.querySelectorAll('.proj-btn').forEach(b => { b.className = 'proj-btn'; });
   document.getElementById('mdWrap').classList.remove('on');
@@ -385,10 +295,26 @@ function stopRec() {
   document.getElementById('postRec').style.display = 'block';
 }
 
+function resetBtnUI() {
+  document.getElementById('recBtn').classList.remove('rec');
+  document.getElementById('micSvg').style.display = 'block';
+  document.getElementById('stopSvg').style.display = 'none';
+  document.getElementById('recLbl').textContent = 'naciśnij aby nagrać';
+  document.getElementById('recLbl').classList.remove('on');
+  document.getElementById('wave').classList.remove('on');
+  document.querySelectorAll('.wb').forEach(b => b.style.height = '4px');
+  setStatus('', false);
+}
+
+function setStatus(msg, active) {
+  const el = document.getElementById('srStatus');
+  el.textContent = msg;
+  active ? el.classList.add('on') : el.classList.remove('on');
+}
+
 function pickProj(btn) {
   document.querySelectorAll('.proj-btn').forEach(b => { b.className = 'proj-btn'; });
-  selProj = btn.dataset.p;
-  selCls = btn.dataset.c;
+  selProj = btn.dataset.p; selCls = btn.dataset.c;
   btn.classList.add('sel-' + selCls);
   buildMd();
 }
@@ -399,8 +325,8 @@ function buildMd() {
   const now = new Date();
   const date = now.toISOString().split('T')[0];
   const time = now.toLocaleTimeString('pl-PL', {hour:'2-digit', minute:'2-digit'});
-  const md = `# Pomysł — ${date} ${time}\n\n**Projekt:** ${selProj}\n**Data:** ${date} ${time}\n\n## Treść\n${txt}\n`;
-  document.getElementById('mdBox').textContent = md;
+  document.getElementById('mdBox').textContent =
+    `# Pomysł — ${date} ${time}\n\n**Projekt:** ${selProj}\n**Data:** ${date} ${time}\n\n## Treść\n${txt}\n`;
   document.getElementById('mdWrap').classList.add('on');
   document.getElementById('copyBtn').disabled = false;
 }
@@ -412,10 +338,9 @@ function saveAndCopy() {
   const date = now.toISOString().split('T')[0];
   const time = now.toLocaleTimeString('pl-PL', {hour:'2-digit', minute:'2-digit'});
   const md = document.getElementById('mdBox').textContent;
-  const note = { id: Date.now(), proj: selProj, cls: selCls, text: txt.substring(0,120), md, date, time };
-  notes.unshift(note);
+  notes.unshift({ id: Date.now(), proj: selProj, cls: selCls, text: txt.substring(0,120), md, date, time });
   if (notes.length > 200) notes = notes.slice(0,200);
-  try { localStorage.setItem('iv2_notes', JSON.stringify(notes)); } catch(e) {}
+  try { localStorage.setItem('iv3_notes', JSON.stringify(notes)); } catch(e) {}
   updCnt();
   navigator.clipboard.writeText(md)
     .then(() => showToast('✓ Skopiowano do schowka!'))
@@ -423,12 +348,11 @@ function saveAndCopy() {
 }
 
 function resetAll() {
-  secs = 0;
+  secs = 0; committedText = '';
   document.getElementById('timer').textContent = '0:00';
   document.getElementById('postRec').style.display = 'none';
   document.getElementById('txBox').value = '';
   document.getElementById('errBox').classList.remove('on');
-  finalText = ''; interimText = '';
 }
 
 function renderHist() {
@@ -447,19 +371,17 @@ function renderHist() {
         <button class="nbtn g" onclick="copyNote(${n.id})">Kopiuj MD</button>
         <button class="nbtn" onclick="delNote(${n.id})">Usuń</button>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function copyNote(id) {
   const n = notes.find(x => x.id === id);
-  if (!n) return;
-  navigator.clipboard.writeText(n.md).then(() => showToast('✓ Skopiowano!')).catch(() => {});
+  if (n) navigator.clipboard.writeText(n.md).then(() => showToast('✓ Skopiowano!')).catch(()=>{});
 }
 
 function delNote(id) {
   notes = notes.filter(x => x.id !== id);
-  try { localStorage.setItem('iv2_notes', JSON.stringify(notes)); } catch(e) {}
+  try { localStorage.setItem('iv3_notes', JSON.stringify(notes)); } catch(e) {}
   updCnt(); renderHist();
 }
 
