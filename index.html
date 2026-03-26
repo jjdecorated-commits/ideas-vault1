@@ -8,22 +8,14 @@
 <title>Ideas Vault</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg:#0a0a0f;--surface:#13131a;--surface2:#1c1c27;--border:#2a2a3d;
-    --accent:#7c6aff;--text:#e8e8f0;--muted:#6b6b8a;
-    --green:#4fffb0;--red:#ff4f6a;
-    --ht:#ff9f43;--ht-bg:rgba(255,159,67,0.12);
-    --sx:#7c6aff;--sx-bg:rgba(124,106,255,0.12);
-    --qt:#4fffb0;--qt-bg:rgba(79,255,176,0.12);
-    --other:#6b6b8a;--other-bg:rgba(107,107,138,0.12);
-  }
+  :root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1c1c27;--border:#2a2a3d;--accent:#7c6aff;--text:#e8e8f0;--muted:#6b6b8a;--green:#4fffb0;--red:#ff4f6a;--ht:#ff9f43;--ht-bg:rgba(255,159,67,0.12);--sx:#7c6aff;--sx-bg:rgba(124,106,255,0.12);--qt:#4fffb0;--qt-bg:rgba(79,255,176,0.12);--other:#6b6b8a;--other-bg:rgba(107,107,138,0.12)}
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh}
   .app{max-width:480px;margin:0 auto;padding:0 0 90px}
   header{padding:24px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
   .logo{font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px}
   .logo-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s ease infinite}
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
   .date{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);background:var(--surface);padding:4px 10px;border-radius:20px;border:1px solid var(--border)}
   .tabs{display:flex;border-bottom:1px solid var(--border);padding:0 20px}
   .tab{padding:12px 16px;font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
@@ -35,9 +27,9 @@
   .record-btn{width:88px;height:88px;border-radius:50%;border:1px solid var(--border);background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;transition:all .2s;outline:none;-webkit-tap-highlight-color:transparent}
   .record-btn::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1.5px solid var(--border);transition:all .3s}
   .record-btn.rec::after{border-color:var(--red);animation:ring 1.4s ease infinite}
-  @keyframes ring{0%,100%{inset:-6px;opacity:1}50%{inset:-12px;opacity:0.3}}
-  .record-btn.rec{background:rgba(255,79,106,0.12);border-color:var(--red)}
-  .record-btn:active{transform:scale(0.95)}
+  @keyframes ring{0%,100%{inset:-6px;opacity:1}50%{inset:-12px;opacity:.3}}
+  .record-btn.rec{background:rgba(255,79,106,.12);border-color:var(--red)}
+  .record-btn:active{transform:scale(.95)}
   .wave{display:flex;align-items:center;gap:3px;height:36px;opacity:0;transition:opacity .3s}
   .wave.on{opacity:1}
   .wb{width:3px;border-radius:2px;background:var(--red);height:4px;transition:height .1s}
@@ -49,10 +41,12 @@
   .transcript-wrap{margin-bottom:16px}
   textarea{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;font-family:'Space Mono',monospace;font-size:13px;line-height:1.7;color:var(--text);resize:none;outline:none;transition:border-color .2s}
   textarea:focus{border-color:var(--accent)}
+  .dedup-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--green);background:rgba(79,255,176,.1);border:1px solid rgba(79,255,176,.25);padding:4px 10px;border-radius:20px;margin-bottom:8px;display:none}
+  .dedup-badge.on{display:inline-flex}
   .proj-wrap{margin-bottom:16px}
   .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .proj-btn{padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:8px;transition:all .15s;-webkit-tap-highlight-color:transparent}
-  .proj-btn:active{transform:scale(0.97)}
+  .proj-btn:active{transform:scale(.97)}
   .proj-btn.sel-ht{background:var(--ht-bg);border-color:var(--ht);color:var(--ht)}
   .proj-btn.sel-sx{background:var(--sx-bg);border-color:var(--sx);color:var(--sx)}
   .proj-btn.sel-qt{background:var(--qt-bg);border-color:var(--qt);color:var(--qt)}
@@ -63,12 +57,11 @@
   .md-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;font-family:'Space Mono',monospace;font-size:12px;line-height:1.8;color:var(--text);white-space:pre-wrap;word-break:break-word;max-height:180px;overflow-y:auto}
   .btn-row{display:flex;gap:8px}
   .btn{flex:1;padding:14px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
-  .btn:active{opacity:.8;transform:scale(0.98)}
+  .btn:active{opacity:.8;transform:scale(.98)}
   .btn.copy{background:var(--green);color:#0a0a0f;border-color:var(--green)}
   .btn:disabled{opacity:.35;cursor:not-allowed}
-  .err{background:rgba(255,79,106,0.1);border:1px solid rgba(255,79,106,0.3);color:var(--red);padding:12px 14px;border-radius:10px;font-size:13px;margin-bottom:16px;display:none}
+  .err{background:rgba(255,79,106,.1);border:1px solid rgba(255,79,106,.3);color:var(--red);padding:12px 14px;border-radius:10px;font-size:13px;margin-bottom:16px;display:none}
   .err.on{display:block}
-  .info{background:rgba(124,106,255,0.1);border:1px solid rgba(124,106,255,0.3);color:var(--accent);padding:12px 14px;border-radius:10px;font-size:13px;margin-bottom:16px;line-height:1.5}
   .note-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;animation:slidein .25s ease}
   @keyframes slidein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
   .note-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
@@ -82,7 +75,7 @@
   .note-btns{display:flex;gap:6px}
   .nbtn{flex:1;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s}
   .nbtn:active{opacity:.7}
-  .nbtn.g{color:var(--green);border-color:rgba(79,255,176,0.3)}
+  .nbtn.g{color:var(--green);border-color:rgba(79,255,176,.3)}
   .empty{text-align:center;padding:50px 20px;color:var(--muted);font-size:14px}
   .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--green);color:#0a0a0f;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:999;white-space:nowrap;pointer-events:none}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -129,15 +122,12 @@
       <div class="sr-status" id="srStatus"></div>
     </div>
 
-    <div class="info">
-      💡 Mów ciągłe zdania. Chrome zatrzymuje się po ok. 10s ciszy — to normalne. Naciśnij Stop gdy skończysz.
-    </div>
-
     <div class="err" id="errBox"></div>
 
     <div id="postRec" style="display:none">
       <div class="transcript-wrap">
         <div class="label">Transkrypcja — sprawdź i popraw</div>
+        <div class="dedup-badge" id="dedupBadge">✓ Usunięto duplikaty</div>
         <textarea id="txBox" rows="5" placeholder="Tutaj pojawi się tekst..."></textarea>
       </div>
       <div class="proj-wrap">
@@ -180,23 +170,78 @@
 </nav>
 
 <script>
-// ── Podejście: JEDNA sesja, BEZ restartu, BEZ continuous
-// Chrome Speech API na Androidzie multiplikuje tekst przy restartach
-// Rozwiązanie: zbieramy wyniki w tablicy indeksowanej po resultIndex
-// i renderujemy wszystko jednorazowo bez nadpisywania
+// ── Deduplikacja ──────────────────────────────────────────────────────────────
+// Algorytm: szuka najdłuższej powtarzającej się sekwencji słów i usuwa duplikaty.
+// "No to No to testujemy No to testujemy ostatni raz" → "No to testujemy ostatni raz"
+// Działa na poziomie słów, case-insensitive, zachowuje oryginalne wielkości liter.
 
+function deduplicate(text) {
+  if (!text || text.trim().length === 0) return { result: text, changed: false };
+
+  const words = text.trim().split(/\s+/);
+  if (words.length < 2) return { result: text, changed: false };
+
+  const original = words.join(' ');
+
+  // Szukamy powtarzających się sekwencji od najdłuższych do najkrótszych
+  // Maksymalna długość sekwencji = połowa długości tekstu
+  const maxLen = Math.floor(words.length / 2);
+
+  for (let seqLen = maxLen; seqLen >= 1; seqLen--) {
+    const cleaned = removeRepeatingSequence(words, seqLen);
+    if (cleaned !== null) {
+      // Znaleziono duplikat — uruchom rekurencyjnie na wyniku
+      const next = deduplicate(cleaned.join(' '));
+      return { result: next.result, changed: true };
+    }
+  }
+
+  return { result: original, changed: false };
+}
+
+function removeRepeatingSequence(words, seqLen) {
+  // Szukamy sekwencji długości seqLen która pojawia się więcej niż raz pod rząd
+  for (let i = 0; i <= words.length - seqLen * 2; i++) {
+    const seq = words.slice(i, i + seqLen).map(w => w.toLowerCase());
+
+    // Sprawdź czy ta sama sekwencja powtarza się zaraz po
+    let j = i + seqLen;
+    let repeatCount = 1;
+
+    while (j + seqLen <= words.length) {
+      const next = words.slice(j, j + seqLen).map(w => w.toLowerCase());
+      if (seq.join(' ') === next.join(' ')) {
+        repeatCount++;
+        j += seqLen;
+      } else {
+        break;
+      }
+    }
+
+    if (repeatCount > 1) {
+      // Usuń duplikaty — zostaw tylko pierwsze wystąpienie
+      const before = words.slice(0, i);
+      const kept = words.slice(i, i + seqLen);
+      const after = words.slice(j);
+      return [...before, ...kept, ...after];
+    }
+  }
+  return null;
+}
+
+// ── State ─────────────────────────────────────────────────────────────────────
 let isRec = false, timerInt = null, waveInt = null, secs = 0;
 let recognition = null;
-// Mapa: resultIndex -> tekst finalny. Nigdy nie nadpisujemy istniejącego klucza.
 let resultMap = {};
 let selProj = '', selCls = '';
 let notes = [];
-try { notes = JSON.parse(localStorage.getItem('iv4_notes') || '[]'); } catch(e) { notes = []; }
+try { notes = JSON.parse(localStorage.getItem('iv5_notes') || '[]'); } catch(e) { notes = []; }
 
 document.getElementById('dateLbl').textContent =
   new Date().toLocaleDateString('pl-PL', {day:'numeric',month:'short',year:'numeric'});
 updCnt();
 
+// ── Tabs ──────────────────────────────────────────────────────────────────────
 function goTab(t) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(tb => tb.classList.remove('active'));
@@ -208,6 +253,7 @@ function goTab(t) {
   if (t==='hist') renderHist();
 }
 
+// ── Recording ─────────────────────────────────────────────────────────────────
 function toggleRec() { if (!isRec) startRec(); else stopRec(); }
 
 function startRec() {
@@ -216,52 +262,41 @@ function startRec() {
 
   resultMap = {};
   document.getElementById('txBox').value = '';
+  document.getElementById('dedupBadge').classList.remove('on');
   document.getElementById('errBox').classList.remove('on');
   document.getElementById('postRec').style.display = 'none';
 
   recognition = new SR();
   recognition.lang = 'pl-PL';
-  recognition.continuous = true;   // Chrome Android wymaga true żeby nie urywać po 5s
+  recognition.continuous = true;
   recognition.interimResults = true;
   recognition.maxAlternatives = 1;
 
   recognition.onstart = () => setStatus('Słucham...', true);
 
   recognition.onresult = (e) => {
-    // Kluczowe: zapisujemy wynik TYLKO jeśli jeszcze nie mamy finalnego dla tego indeksu
     for (let i = 0; i < e.results.length; i++) {
       if (e.results[i].isFinal) {
-        // Finalny wynik — zapisz i nie nadpisuj
-        if (resultMap[i] === undefined || resultMap[i].interim) {
+        if (!resultMap[i] || resultMap[i].interim) {
           resultMap[i] = { text: e.results[i][0].transcript, interim: false };
         }
       } else {
-        // Interim — zapisz tylko jeśli nie mamy już finalnego
-        if (resultMap[i] === undefined || resultMap[i].interim) {
+        if (!resultMap[i] || resultMap[i].interim) {
           resultMap[i] = { text: e.results[i][0].transcript, interim: true };
         }
       }
     }
-    renderTranscript();
+    renderTranscriptLive();
   };
 
   recognition.onerror = (e) => {
-    if (e.error === 'not-allowed') {
-      showErr('Brak dostępu do mikrofonu. Zezwól w ustawieniach Chrome.');
-      forceStop();
-    } else if (e.error === 'no-speech') {
-      setStatus('Cisza — mów bliżej telefonu', false);
-    } else if (e.error === 'network') {
-      setStatus('Błąd sieci', false);
-    }
+    if (e.error === 'not-allowed') { showErr('Brak dostępu do mikrofonu.'); forceStop(); }
+    else if (e.error === 'no-speech') setStatus('Nic nie słyszę...', false);
+    else if (e.error === 'network') setStatus('Błąd sieci', false);
   };
 
-  // onend NIE restartuje — to eliminuje multiplikację
   recognition.onend = () => {
-    if (isRec) {
-      // Chrome zatrzymał się sam (np. cisza) — informuj użytkownika
-      setStatus('Chrome zatrzymał — naciśnij Stop lub nagraj ponownie', false);
-    }
+    if (isRec) setStatus('Zatrzymano — naciśnij Stop', false);
   };
 
   try { recognition.start(); } catch(e) { showErr('Nie można uruchomić mikrofonu.'); return; }
@@ -287,11 +322,28 @@ function startRec() {
   }, 110);
 }
 
-function renderTranscript() {
-  // Złóż tekst z mapy — każdy indeks tylko raz, w kolejności
-  const keys = Object.keys(resultMap).map(Number).sort((a,b) => a-b);
+// Podgląd na żywo podczas nagrywania — bez deduplikacji
+function renderTranscriptLive() {
+  const keys = Object.keys(resultMap).map(Number).sort((a,b)=>a-b);
   const text = keys.map(k => resultMap[k].text).join(' ').trim();
   document.getElementById('txBox').value = text;
+}
+
+// Po zatrzymaniu — deduplikacja
+function renderTranscriptFinal() {
+  const keys = Object.keys(resultMap).map(Number).sort((a,b)=>a-b);
+  // Tylko finalne wyniki
+  const text = keys
+    .filter(k => !resultMap[k].interim)
+    .map(k => resultMap[k].text)
+    .join(' ').trim();
+
+  const { result, changed } = deduplicate(text);
+  document.getElementById('txBox').value = result;
+
+  if (changed) {
+    document.getElementById('dedupBadge').classList.add('on');
+  }
 }
 
 function forceStop() {
@@ -306,6 +358,10 @@ function stopRec() {
   if (recognition) { try { recognition.stop(); } catch(e) {} recognition = null; }
   clearInterval(timerInt); clearInterval(waveInt);
   resetBtnUI();
+
+  // Deduplikacja po zatrzymaniu
+  renderTranscriptFinal();
+
   selProj = ''; selCls = '';
   document.querySelectorAll('.proj-btn').forEach(b => { b.className = 'proj-btn'; });
   document.getElementById('mdWrap').classList.remove('on');
@@ -330,6 +386,7 @@ function setStatus(msg, active) {
   active ? el.classList.add('on') : el.classList.remove('on');
 }
 
+// ── Projekt & Markdown ────────────────────────────────────────────────────────
 function pickProj(btn) {
   document.querySelectorAll('.proj-btn').forEach(b => { b.className = 'proj-btn'; });
   selProj = btn.dataset.p; selCls = btn.dataset.c;
@@ -358,7 +415,7 @@ function saveAndCopy() {
   const md = document.getElementById('mdBox').textContent;
   notes.unshift({id:Date.now(),proj:selProj,cls:selCls,text:txt.substring(0,120),md,date,time});
   if (notes.length>200) notes = notes.slice(0,200);
-  try { localStorage.setItem('iv4_notes', JSON.stringify(notes)); } catch(e) {}
+  try { localStorage.setItem('iv5_notes', JSON.stringify(notes)); } catch(e) {}
   updCnt();
   navigator.clipboard.writeText(md)
     .then(()=>showToast('✓ Skopiowano do schowka!'))
@@ -371,8 +428,10 @@ function resetAll() {
   document.getElementById('postRec').style.display = 'none';
   document.getElementById('txBox').value = '';
   document.getElementById('errBox').classList.remove('on');
+  document.getElementById('dedupBadge').classList.remove('on');
 }
 
+// ── Historia ──────────────────────────────────────────────────────────────────
 function renderHist() {
   const list = document.getElementById('histList');
   const empty = document.getElementById('histEmpty');
@@ -399,14 +458,14 @@ function copyNote(id) {
 
 function delNote(id) {
   notes = notes.filter(x=>x.id!==id);
-  try { localStorage.setItem('iv4_notes', JSON.stringify(notes)); } catch(e) {}
+  try { localStorage.setItem('iv5_notes', JSON.stringify(notes)); } catch(e) {}
   updCnt(); renderHist();
 }
 
 function updCnt() { document.getElementById('cnt').textContent = notes.length; }
 function showErr(msg) { const e=document.getElementById('errBox'); e.textContent=msg; e.classList.add('on'); }
 function showToast(msg) {
-  const t = document.getElementById('toast');
+  const t=document.getElementById('toast');
   t.textContent=msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2400);
 }
