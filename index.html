@@ -12,41 +12,55 @@
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh}
   .app{max-width:480px;margin:0 auto;padding:0 0 90px}
-  header{padding:24px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-  .logo{font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px}
+  header{padding:20px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .logo{font-size:17px;font-weight:800;display:flex;align-items:center;gap:8px;flex-shrink:0}
   .logo-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s ease infinite}
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+  .header-right{display:flex;align-items:center;gap:8px}
   .date{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);background:var(--surface);padding:4px 10px;border-radius:20px;border:1px solid var(--border)}
+  .net-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid}
+  .net-badge.online{color:var(--green);border-color:rgba(79,255,176,.3);background:rgba(79,255,176,.08)}
+  .net-badge.offline{color:var(--amber);border-color:rgba(255,179,71,.3);background:rgba(255,179,71,.08)}
+
   .tabs{display:flex;border-bottom:1px solid var(--border);padding:0 20px}
   .tab{padding:12px 16px;font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
   .tab.active{color:var(--text);border-bottom-color:var(--accent)}
   .screen{display:none;padding:20px}
   .screen.active{display:block}
 
+  /* Mode banner */
+  .mode-banner{padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.5;margin-bottom:16px;border:1px solid}
+  .mode-banner.online-mode{color:var(--green);border-color:rgba(79,255,176,.25);background:rgba(79,255,176,.07)}
+  .mode-banner.offline-mode{color:var(--amber);border-color:rgba(255,179,71,.25);background:rgba(255,179,71,.07)}
+
   /* Record area */
-  .record-area{display:flex;flex-direction:column;align-items:center;gap:12px;padding:28px 0 20px}
+  .record-area{display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 0 16px}
   .timer{font-family:'Space Mono',monospace;font-size:36px;font-weight:700;color:var(--text);letter-spacing:3px}
   .timer.paused{color:var(--amber)}
   .record-btn{width:88px;height:88px;border-radius:50%;border:1px solid var(--border);background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;transition:all .2s;outline:none;-webkit-tap-highlight-color:transparent}
   .record-btn::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1.5px solid var(--border);transition:all .3s}
   .record-btn.rec::after{border-color:var(--red);animation:ring 1.4s ease infinite}
   .record-btn.paused-btn::after{border-color:var(--amber)}
+  .record-btn.offline-rec::after{border-color:var(--amber);animation:ring 1.4s ease infinite}
   @keyframes ring{0%,100%{inset:-6px;opacity:1}50%{inset:-12px;opacity:.3}}
   .record-btn.rec{background:rgba(255,79,106,.12);border-color:var(--red)}
   .record-btn.paused-btn{background:rgba(255,179,71,.12);border-color:var(--amber)}
+  .record-btn.offline-rec{background:rgba(255,179,71,.12);border-color:var(--amber)}
   .record-btn:active{transform:scale(.95)}
   .wave{display:flex;align-items:center;gap:3px;height:36px;opacity:0;transition:opacity .3s}
   .wave.on{opacity:1}
-  .wb{width:3px;border-radius:2px;background:var(--red);height:4px;transition:height .1s}
-  .rec-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+  .wb{width:3px;border-radius:2px;height:4px;transition:height .1s}
+  .wb.red{background:var(--red)}
+  .wb.amber{background:var(--amber)}
+  .rec-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-align:center}
   .rec-label.on{color:var(--red)}
   .rec-label.paused{color:var(--amber)}
+  .rec-label.offline-on{color:var(--amber)}
   .sr-status{font-size:12px;color:var(--muted);text-align:center;min-height:18px;padding:0 20px}
   .sr-status.on{color:var(--accent)}
 
-  /* Control buttons row */
   .ctrl-row{display:flex;gap:8px;width:100%;max-width:320px}
-  .ctrl-btn{flex:1;padding:10px 8px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;display:none;align-items:center;justify-content:center;gap:6px}
+  .ctrl-btn{flex:1;padding:10px 8px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;display:none;align-items:center;justify-content:center;gap:5px}
   .ctrl-btn.show{display:flex}
   .ctrl-btn:active{opacity:.8;transform:scale(.97)}
   .ctrl-btn.pause-btn{border-color:var(--amber);color:var(--amber)}
@@ -54,7 +68,20 @@
   .ctrl-btn.save-btn{background:var(--green);color:#0a0a0f;border-color:var(--green)}
   .ctrl-btn.discard-btn{border-color:var(--red);color:var(--red)}
 
-  /* Post-rec */
+  /* Offline audio queue */
+  .offline-queue{margin-bottom:16px;display:none}
+  .offline-queue.on{display:block}
+  .oq-label{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+  .oq-item{background:var(--surface);border:1px solid rgba(255,179,71,.25);border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+  .oq-info{flex:1}
+  .oq-name{font-size:13px;color:var(--text);font-weight:700}
+  .oq-dur{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)}
+  .oq-btn{padding:6px 12px;border-radius:8px;border:1px solid;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .15s}
+  .oq-btn:active{opacity:.7}
+  .oq-btn.transcribe{color:var(--green);border-color:rgba(79,255,176,.3);background:rgba(79,255,176,.08)}
+  .oq-btn.del{color:var(--red);border-color:rgba(255,79,106,.3);background:transparent;margin-left:4px}
+  .oq-btn:disabled{opacity:.35;cursor:not-allowed}
+
   .label{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
   .transcript-wrap{margin-bottom:16px}
   .dedup-badge{font-size:11px;color:var(--green);background:rgba(79,255,176,.1);border:1px solid rgba(79,255,176,.25);padding:4px 10px;border-radius:20px;margin-bottom:8px;display:none}
@@ -89,7 +116,7 @@
   .hbtn:active{opacity:.7}
   .hbtn.danger{color:var(--red);border-color:rgba(255,79,106,.3)}
   .hbtn.active-sel{color:var(--accent);border-color:var(--accent)}
-  .note-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;animation:slidein .25s ease;position:relative;transition:border-color .15s}
+  .note-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;animation:slidein .25s ease}
   .note-card.selected{border-color:var(--accent)}
   @keyframes slidein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
   .note-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px}
@@ -108,15 +135,12 @@
   .nbtn:active{opacity:.7}
   .nbtn.g{color:var(--green);border-color:rgba(79,255,176,.3)}
   .nbtn.r{color:var(--red);border-color:rgba(255,79,106,.3)}
-
-  /* Delete selected bar */
   .del-bar{position:fixed;bottom:72px;left:50%;transform:translateX(-50%);width:calc(100% - 40px);max-width:440px;background:var(--surface);border:1px solid var(--red);border-radius:12px;padding:12px 16px;display:none;align-items:center;justify-content:space-between;z-index:200;gap:8px}
   .del-bar.show{display:flex}
   .del-bar-text{font-size:13px;color:var(--text)}
   .del-bar-btn{padding:8px 16px;border-radius:8px;border:none;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer}
   .del-bar-btn.cancel{background:var(--surface2);color:var(--muted)}
   .del-bar-btn.confirm{background:var(--red);color:white}
-
   .empty{text-align:center;padding:50px 20px;color:var(--muted);font-size:14px}
   .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--green);color:#0a0a0f;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:999;white-space:nowrap;pointer-events:none}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -132,7 +156,10 @@
 <div class="app">
   <header>
     <div class="logo"><div class="logo-dot"></div>Ideas Vault</div>
-    <div class="date" id="dateLbl"></div>
+    <div class="header-right">
+      <div class="net-badge" id="netBadge">...</div>
+      <div class="date" id="dateLbl"></div>
+    </div>
   </header>
   <div class="tabs">
     <div class="tab active" onclick="goTab('rec')">Nagraj</div>
@@ -141,9 +168,14 @@
 
   <!-- RECORD SCREEN -->
   <div class="screen active" id="screen-rec">
+
+    <!-- Mode banner -->
+    <div class="mode-banner online-mode" id="modeBanner">
+      🟢 Tryb online — transkrypcja na żywo
+    </div>
+
     <div class="record-area">
       <div class="timer" id="timer">0:00</div>
-
       <button class="record-btn" id="recBtn" onclick="handleMainBtn()">
         <svg id="micSvg" width="32" height="32" viewBox="0 0 24 24" fill="none">
           <rect x="9" y="2" width="6" height="12" rx="3" fill="#7c6aff"/>
@@ -159,26 +191,29 @@
           <polygon points="6,4 20,12 6,20" fill="#4fffb0"/>
         </svg>
       </button>
-
       <div class="wave" id="wave">
-        <div class="wb"></div><div class="wb"></div><div class="wb"></div>
-        <div class="wb"></div><div class="wb"></div><div class="wb"></div>
-        <div class="wb"></div><div class="wb"></div><div class="wb"></div>
-        <div class="wb"></div>
+        <div class="wb red"></div><div class="wb red"></div><div class="wb red"></div>
+        <div class="wb red"></div><div class="wb red"></div><div class="wb red"></div>
+        <div class="wb red"></div><div class="wb red"></div><div class="wb red"></div>
+        <div class="wb red"></div>
       </div>
       <div class="rec-label" id="recLbl">naciśnij aby nagrać</div>
       <div class="sr-status" id="srStatus"></div>
-
-      <!-- Control buttons -->
       <div class="ctrl-row" id="ctrlRow">
         <button class="ctrl-btn discard-btn" id="discardBtn" onclick="discardRec()">🗑 Usuń</button>
         <button class="ctrl-btn save-btn" id="saveBtn" onclick="saveRec()">✓ Zapisz</button>
       </div>
     </div>
 
+    <!-- Offline audio queue -->
+    <div class="offline-queue" id="offlineQueue">
+      <div class="oq-label">⏳ Nagrania do transkrypcji</div>
+      <div id="queueList"></div>
+    </div>
+
     <div class="err" id="errBox"></div>
 
-    <!-- Post-rec: transcript + project -->
+    <!-- Post-rec -->
     <div id="postRec" style="display:none">
       <div class="transcript-wrap">
         <div class="label">Transkrypcja — sprawdź i popraw</div>
@@ -219,7 +254,6 @@
   </div>
 </div>
 
-<!-- Delete selected bar -->
 <div class="del-bar" id="delBar">
   <div class="del-bar-text" id="delBarText">Zaznaczono 0</div>
   <div style="display:flex;gap:8px">
@@ -242,21 +276,46 @@
 </nav>
 
 <script>
-// ── Stany nagrywania ─────────────────────────────────────────────────────────
-// idle | recording | paused | review
-let recState = 'idle';
+// ── Stan ─────────────────────────────────────────────────────────────────────
+let isOnline = navigator.onLine;
+let recState = 'idle'; // idle | recording | paused | review
 let recognition = null;
+let mediaRecorder = null;
+let audioChunks = [];
 let timerInt = null, waveInt = null, secs = 0;
 let resultMap = {};
 let selProj = '', selCls = '';
 let selectMode = false;
 let selectedIds = new Set();
+let offlineQueue = []; // {id, name, blob, duration}
 let notes = [];
-try { notes = JSON.parse(localStorage.getItem('iv6_notes') || '[]'); } catch(e) { notes = []; }
 
+try { notes = JSON.parse(localStorage.getItem('iv7_notes') || '[]'); } catch(e) { notes = []; }
 document.getElementById('dateLbl').textContent =
   new Date().toLocaleDateString('pl-PL', {day:'numeric',month:'short',year:'numeric'});
 updCnt();
+updateNetStatus();
+
+window.addEventListener('online', () => { isOnline = true; updateNetStatus(); renderQueue(); });
+window.addEventListener('offline', () => { isOnline = false; updateNetStatus(); });
+
+function updateNetStatus() {
+  const badge = document.getElementById('netBadge');
+  const banner = document.getElementById('modeBanner');
+  const wbs = document.querySelectorAll('.wb');
+  if (isOnline) {
+    badge.textContent = 'Online'; badge.className = 'net-badge online';
+    banner.className = 'mode-banner online-mode';
+    banner.textContent = '🟢 Tryb online — transkrypcja na żywo';
+    wbs.forEach(b => b.classList.replace('amber','red'));
+  } else {
+    badge.textContent = 'Offline'; badge.className = 'net-badge offline';
+    banner.className = 'mode-banner offline-mode';
+    banner.textContent = '🟡 Tryb offline — nagrywa audio, transkrypcja po połączeniu';
+    wbs.forEach(b => b.classList.replace('red','amber'));
+  }
+  renderQueue();
+}
 
 // ── Tabs ─────────────────────────────────────────────────────────────────────
 function goTab(t) {
@@ -272,13 +331,17 @@ function goTab(t) {
 
 // ── Główny przycisk ──────────────────────────────────────────────────────────
 function handleMainBtn() {
-  if (recState === 'idle') startRec();
-  else if (recState === 'recording') pauseRec();
-  else if (recState === 'paused') resumeRec();
+  if (recState === 'idle') {
+    if (isOnline) startOnlineRec(); else startOfflineRec();
+  } else if (recState === 'recording') {
+    pauseRec();
+  } else if (recState === 'paused') {
+    resumeRec();
+  }
 }
 
-// ── Start ────────────────────────────────────────────────────────────────────
-function startRec() {
+// ── ONLINE: Speech Recognition ───────────────────────────────────────────────
+function startOnlineRec() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) { showErr('Użyj Chrome na Androidzie.'); return; }
   resultMap = {};
@@ -290,8 +353,7 @@ function startRec() {
   launchSR();
   recState = 'recording';
   updateUI();
-  startTimer();
-  startWave();
+  startTimer(); startWave();
 }
 
 function launchSR() {
@@ -303,9 +365,13 @@ function launchSR() {
   recognition.maxAlternatives = 1;
   recognition.onstart = () => setStatus('Słucham...', true);
   recognition.onresult = onSRResult;
-  recognition.onerror = onSRError;
+  recognition.onerror = (e) => {
+    if (e.error==='not-allowed') { showErr('Brak dostępu do mikrofonu.'); discardRec(); }
+    else if (e.error==='no-speech') setStatus('Nic nie słyszę...', false);
+    else if (e.error==='network') setStatus('Brak internetu', false);
+  };
   recognition.onend = () => {
-    if (recState === 'recording') setStatus('Zatrzymano — naciśnij Zapisz lub kontynuuj', false);
+    if (recState==='recording') setStatus('Zatrzymano — naciśnij Zapisz', false);
   };
   try { recognition.start(); } catch(e) { showErr('Nie można uruchomić mikrofonu.'); }
 }
@@ -313,71 +379,187 @@ function launchSR() {
 function onSRResult(e) {
   for (let i = 0; i < e.results.length; i++) {
     if (e.results[i].isFinal) {
-      if (!resultMap[i] || resultMap[i].interim) {
+      if (!resultMap[i] || resultMap[i].interim)
         resultMap[i] = { text: e.results[i][0].transcript, interim: false };
-      }
     } else {
-      if (!resultMap[i] || resultMap[i].interim) {
+      if (!resultMap[i] || resultMap[i].interim)
         resultMap[i] = { text: e.results[i][0].transcript, interim: true };
-      }
     }
   }
   renderLive();
 }
 
-function onSRError(e) {
-  if (e.error === 'not-allowed') { showErr('Brak dostępu do mikrofonu.'); discardRec(); }
-  else if (e.error === 'no-speech') setStatus('Nic nie słyszę...', false);
+// ── OFFLINE: MediaRecorder ───────────────────────────────────────────────────
+async function startOfflineRec() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    audioChunks = [];
+    mediaRecorder = new MediaRecorder(stream);
+    mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
+    mediaRecorder.onstop = () => { stream.getTracks().forEach(t => t.stop()); };
+    mediaRecorder.start(1000);
+    secs = 0;
+    recState = 'recording';
+    updateUI();
+    startTimer(); startWave();
+    setStatus('Nagrywanie audio...', true);
+  } catch(e) {
+    showErr('Brak dostępu do mikrofonu: ' + e.message);
+  }
 }
 
-// ── Pauza ────────────────────────────────────────────────────────────────────
+// ── Pauza / Kontynuuj ────────────────────────────────────────────────────────
 function pauseRec() {
   if (recognition) { try { recognition.stop(); } catch(e) {} recognition = null; }
+  if (mediaRecorder && mediaRecorder.state === 'recording') mediaRecorder.pause();
   stopTimer(); stopWave();
   recState = 'paused';
   updateUI();
-  setStatus('Pauza — naciśnij aby kontynuować', false);
+  setStatus('Pauza', false);
 }
 
-// ── Kontynuuj ────────────────────────────────────────────────────────────────
 function resumeRec() {
-  launchSR();
+  if (isOnline) {
+    launchSR();
+  } else {
+    if (mediaRecorder && mediaRecorder.state === 'paused') mediaRecorder.resume();
+    setStatus('Nagrywanie audio...', true);
+  }
   recState = 'recording';
   updateUI();
-  startTimer();
-  startWave();
+  startTimer(); startWave();
 }
 
 // ── Zapisz ───────────────────────────────────────────────────────────────────
 function saveRec() {
-  if (recognition) { try { recognition.stop(); } catch(e) {} recognition = null; }
-  stopTimer(); stopWave();
-  recState = 'review';
-  updateUI();
-  renderFinal();
-  selProj = ''; selCls = '';
-  document.querySelectorAll('.proj-btn').forEach(b => { b.className = 'proj-btn'; });
-  document.getElementById('mdWrap').classList.remove('on');
-  document.getElementById('copyBtn').disabled = true;
-  document.getElementById('postRec').style.display = 'block';
+  if (isOnline) {
+    // Online: zakończ SR i pokaż transkrypcję
+    if (recognition) { try { recognition.stop(); } catch(e) {} recognition = null; }
+    stopTimer(); stopWave();
+    recState = 'review';
+    updateUI();
+    renderFinal();
+    resetPostRec();
+    document.getElementById('postRec').style.display = 'block';
+  } else {
+    // Offline: zapisz audio do kolejki
+    if (mediaRecorder) {
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(audioChunks, { type: 'audio/webm' });
+        const id = Date.now();
+        const dur = formatTime(secs);
+        const name = 'Nagranie ' + new Date().toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'});
+        offlineQueue.push({ id, name, blob, duration: dur });
+        renderQueue();
+        showToast('Zapisano — transkrybuj po połączeniu z internetem');
+      };
+      mediaRecorder.stop();
+    }
+    stopTimer(); stopWave();
+    secs = 0;
+    document.getElementById('timer').textContent = '0:00';
+    recState = 'idle';
+    updateUI();
+    setStatus('', false);
+  }
 }
 
-// ── Usuń nagranie ────────────────────────────────────────────────────────────
+// ── Usuń nagranie ─────────────────────────────────────────────────────────────
 function discardRec() {
   if (recognition) { try { recognition.abort(); } catch(e) {} recognition = null; }
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+    mediaRecorder.onstop = () => {};
+    mediaRecorder.stop();
+  }
   stopTimer(); stopWave();
-  resultMap = {}; secs = 0;
+  audioChunks = []; resultMap = {}; secs = 0;
   document.getElementById('timer').textContent = '0:00';
   document.getElementById('timer').classList.remove('paused');
   document.getElementById('postRec').style.display = 'none';
   document.getElementById('errBox').classList.remove('on');
   recState = 'idle';
-  updateUI();
-  setStatus('', false);
+  updateUI(); setStatus('', false);
   showToast('Nagranie usunięte');
 }
 
-// ── UI update ────────────────────────────────────────────────────────────────
+// ── Kolejka offline ──────────────────────────────────────────────────────────
+function renderQueue() {
+  const el = document.getElementById('offlineQueue');
+  const list = document.getElementById('queueList');
+  if (!offlineQueue.length) { el.classList.remove('on'); return; }
+  el.classList.add('on');
+  list.innerHTML = offlineQueue.map(q => `
+    <div class="oq-item" id="oq-${q.id}">
+      <div class="oq-info">
+        <div class="oq-name">${q.name}</div>
+        <div class="oq-dur">${q.duration}</div>
+      </div>
+      <button class="oq-btn transcribe" id="tbtn-${q.id}" onclick="transcribeOffline(${q.id})" ${!isOnline?'disabled':''}>
+        ${isOnline ? '▶ Transkrybuj' : 'Brak sieci'}
+      </button>
+      <button class="oq-btn del" onclick="deleteQueued(${q.id})">✕</button>
+    </div>
+  `).join('');
+}
+
+function deleteQueued(id) {
+  offlineQueue = offlineQueue.filter(q => q.id !== id);
+  renderQueue();
+}
+
+function transcribeOffline(id) {
+  const item = offlineQueue.find(q => q.id === id);
+  if (!item || !isOnline) return;
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { showErr('Transkrypcja wymaga Chrome.'); return; }
+
+  const btn = document.getElementById('tbtn-'+id);
+  btn.textContent = '⏳ Przetwarzam...'; btn.disabled = true;
+
+  // Odtwarzamy audio i puszczamy przez SR
+  const url = URL.createObjectURL(item.blob);
+  const audio = new Audio(url);
+
+  resultMap = {};
+  document.getElementById('txBox').value = '';
+  document.getElementById('dedupBadge').classList.remove('on');
+
+  const sr = new SR();
+  sr.lang = 'pl-PL';
+  sr.continuous = true;
+  sr.interimResults = false;
+
+  sr.onresult = onSRResult;
+  sr.onerror = () => {
+    btn.textContent = '▶ Transkrybuj'; btn.disabled = false;
+    showToast('Błąd transkrypcji — spróbuj ponownie');
+  };
+  sr.onend = () => {
+    URL.revokeObjectURL(url);
+    offlineQueue = offlineQueue.filter(q => q.id !== id);
+    renderQueue();
+    renderFinal();
+    resetPostRec();
+    document.getElementById('postRec').style.display = 'block';
+    recState = 'review';
+    updateUI();
+    showToast('Transkrypcja gotowa!');
+  };
+
+  audio.play().then(() => sr.start()).catch(() => {
+    // Fallback: jeśli audio nie może być odtworzone przez SR,
+    // pokaż pusty textarea do ręcznego wpisania
+    URL.revokeObjectURL(url);
+    offlineQueue = offlineQueue.filter(q => q.id !== id);
+    renderQueue();
+    document.getElementById('txBox').value = '';
+    document.getElementById('postRec').style.display = 'block';
+    recState = 'review'; updateUI();
+    showToast('Wpisz treść ręcznie — transkrypcja niedostępna');
+  });
+}
+
+// ── UI ────────────────────────────────────────────────────────────────────────
 function updateUI() {
   const btn = document.getElementById('recBtn');
   const micSvg = document.getElementById('micSvg');
@@ -389,103 +571,90 @@ function updateUI() {
   const discardBtn = document.getElementById('discardBtn');
   const saveBtn = document.getElementById('saveBtn');
 
-  // Reset
-  btn.classList.remove('rec','paused-btn');
-  micSvg.style.display = 'none';
-  pauseIcon.style.display = 'none';
-  resumeIcon.style.display = 'none';
-  lbl.classList.remove('on','paused');
-  timer.classList.remove('paused');
-  discardBtn.classList.remove('show');
-  saveBtn.classList.remove('show');
+  btn.className = 'record-btn';
+  micSvg.style.display='none'; pauseIcon.style.display='none'; resumeIcon.style.display='none';
+  lbl.className='rec-label'; timer.classList.remove('paused');
+  discardBtn.classList.remove('show'); saveBtn.classList.remove('show');
 
-  if (recState === 'idle') {
-    micSvg.style.display = 'block';
-    lbl.textContent = 'naciśnij aby nagrać';
+  if (recState==='idle') {
+    micSvg.style.display='block';
+    lbl.textContent = isOnline ? 'naciśnij aby nagrać' : 'naciśnij aby nagrać (offline)';
     wave.classList.remove('on');
-  } else if (recState === 'recording') {
-    btn.classList.add('rec');
-    pauseIcon.style.display = 'block';
-    lbl.textContent = 'naciśnij aby zatrzymać';
-    lbl.classList.add('on');
+  } else if (recState==='recording') {
+    btn.classList.add(isOnline ? 'rec' : 'offline-rec');
+    pauseIcon.style.display='block';
+    lbl.textContent='naciśnij aby zatrzymać';
+    lbl.classList.add(isOnline?'on':'offline-on');
     wave.classList.add('on');
-    discardBtn.classList.add('show');
-    saveBtn.classList.add('show');
-  } else if (recState === 'paused') {
+    discardBtn.classList.add('show'); saveBtn.classList.add('show');
+  } else if (recState==='paused') {
     btn.classList.add('paused-btn');
-    resumeIcon.style.display = 'block';
-    lbl.textContent = 'naciśnij aby kontynuować';
-    lbl.classList.add('paused');
-    timer.classList.add('paused');
+    resumeIcon.style.display='block';
+    lbl.textContent='naciśnij aby kontynuować';
+    lbl.classList.add('paused'); timer.classList.add('paused');
     wave.classList.remove('on');
-    discardBtn.classList.add('show');
-    saveBtn.classList.add('show');
-  } else if (recState === 'review') {
-    micSvg.style.display = 'block';
-    lbl.textContent = 'naciśnij aby nagrać';
+    discardBtn.classList.add('show'); saveBtn.classList.add('show');
+  } else if (recState==='review') {
+    micSvg.style.display='block';
+    lbl.textContent='naciśnij aby nagrać';
     wave.classList.remove('on');
   }
 }
 
-// ── Timer ────────────────────────────────────────────────────────────────────
 function startTimer() {
   timerInt = setInterval(() => {
     secs++;
-    document.getElementById('timer').textContent =
-      Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0');
+    document.getElementById('timer').textContent = formatTime(secs);
   }, 1000);
 }
-function stopTimer() { clearInterval(timerInt); timerInt = null; }
-
-// ── Wave ─────────────────────────────────────────────────────────────────────
+function stopTimer() { clearInterval(timerInt); timerInt=null; }
 function startWave() {
   waveInt = setInterval(() => {
     document.querySelectorAll('.wb').forEach(b => { b.style.height=(Math.random()*26+4)+'px'; });
   }, 110);
 }
-function stopWave() {
-  clearInterval(waveInt); waveInt = null;
-  document.querySelectorAll('.wb').forEach(b => b.style.height='4px');
-}
+function stopWave() { clearInterval(waveInt); waveInt=null; document.querySelectorAll('.wb').forEach(b=>b.style.height='4px'); }
+function formatTime(s) { return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
 
-// ── Transkrypcja ─────────────────────────────────────────────────────────────
+// ── Transkrypcja ──────────────────────────────────────────────────────────────
 function renderLive() {
   const keys = Object.keys(resultMap).map(Number).sort((a,b)=>a-b);
   document.getElementById('txBox').value = keys.map(k=>resultMap[k].text).join(' ').trim();
 }
-
 function renderFinal() {
   const keys = Object.keys(resultMap).map(Number).sort((a,b)=>a-b);
   const text = keys.filter(k=>!resultMap[k].interim).map(k=>resultMap[k].text).join(' ').trim();
-  const {result, changed} = deduplicate(text);
+  const {result,changed} = deduplicate(text);
   document.getElementById('txBox').value = result;
   if (changed) document.getElementById('dedupBadge').classList.add('on');
 }
-
-// ── Deduplikacja ─────────────────────────────────────────────────────────────
-function deduplicate(text) {
-  if (!text || text.trim().length === 0) return {result:text, changed:false};
-  const words = text.trim().split(/\s+/);
-  if (words.length < 2) return {result:text, changed:false};
-  const maxLen = Math.floor(words.length/2);
-  for (let seqLen = maxLen; seqLen >= 1; seqLen--) {
-    const cleaned = removeRepeating(words, seqLen);
-    if (cleaned !== null) {
-      const next = deduplicate(cleaned.join(' '));
-      return {result:next.result, changed:true};
-    }
-  }
-  return {result:words.join(' '), changed:false};
+function resetPostRec() {
+  selProj=''; selCls='';
+  document.querySelectorAll('.proj-btn').forEach(b=>{b.className='proj-btn';});
+  document.getElementById('mdWrap').classList.remove('on');
+  document.getElementById('copyBtn').disabled=true;
 }
-function removeRepeating(words, seqLen) {
-  for (let i = 0; i <= words.length - seqLen*2; i++) {
-    const seq = words.slice(i, i+seqLen).map(w=>w.toLowerCase());
-    let j = i+seqLen, count = 1;
-    while (j+seqLen <= words.length) {
-      const next = words.slice(j, j+seqLen).map(w=>w.toLowerCase());
-      if (seq.join(' ')===next.join(' ')) { count++; j+=seqLen; } else break;
+
+// ── Deduplikacja ──────────────────────────────────────────────────────────────
+function deduplicate(text) {
+  if (!text||text.trim().length===0) return {result:text,changed:false};
+  const words=text.trim().split(/\s+/);
+  if (words.length<2) return {result:text,changed:false};
+  const maxLen=Math.floor(words.length/2);
+  for (let seqLen=maxLen;seqLen>=1;seqLen--) {
+    const cleaned=removeRepeating(words,seqLen);
+    if (cleaned!==null) { const next=deduplicate(cleaned.join(' ')); return {result:next.result,changed:true}; }
+  }
+  return {result:words.join(' '),changed:false};
+}
+function removeRepeating(words,seqLen) {
+  for (let i=0;i<=words.length-seqLen*2;i++) {
+    const seq=words.slice(i,i+seqLen).map(w=>w.toLowerCase());
+    let j=i+seqLen,count=1;
+    while (j+seqLen<=words.length) {
+      if (seq.join(' ')===words.slice(j,j+seqLen).map(w=>w.toLowerCase()).join(' ')) {count++;j+=seqLen;} else break;
     }
-    if (count > 1) return [...words.slice(0,i), ...words.slice(i,i+seqLen), ...words.slice(j)];
+    if (count>1) return [...words.slice(0,i),...words.slice(i,i+seqLen),...words.slice(j)];
   }
   return null;
 }
@@ -493,41 +662,36 @@ function removeRepeating(words, seqLen) {
 // ── Projekt & Markdown ────────────────────────────────────────────────────────
 function pickProj(btn) {
   document.querySelectorAll('.proj-btn').forEach(b=>{b.className='proj-btn';});
-  selProj = btn.dataset.p; selCls = btn.dataset.c;
-  btn.classList.add('sel-'+selCls);
-  buildMd();
+  selProj=btn.dataset.p; selCls=btn.dataset.c;
+  btn.classList.add('sel-'+selCls); buildMd();
 }
 function buildMd() {
-  const txt = document.getElementById('txBox').value.trim();
-  if (!txt || !selProj) return;
-  const now = new Date();
-  const date = now.toISOString().split('T')[0];
-  const time = now.toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'});
-  document.getElementById('mdBox').textContent =
+  const txt=document.getElementById('txBox').value.trim();
+  if (!txt||!selProj) return;
+  const now=new Date();
+  const date=now.toISOString().split('T')[0];
+  const time=now.toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('mdBox').textContent=
     `# Pomysł — ${date} ${time}\n\n**Projekt:** ${selProj}\n**Data:** ${date} ${time}\n\n## Treść\n${txt}\n`;
   document.getElementById('mdWrap').classList.add('on');
-  document.getElementById('copyBtn').disabled = false;
+  document.getElementById('copyBtn').disabled=false;
 }
-
 function copyAndSaveToHist() {
-  const txt = document.getElementById('txBox').value.trim();
-  if (!txt || !selProj) return;
-  const now = new Date();
-  const date = now.toISOString().split('T')[0];
-  const time = now.toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'});
-  const md = document.getElementById('mdBox').textContent;
-  const note = {id:Date.now(),proj:selProj,cls:selCls,text:txt.substring(0,120),md,date,time};
-  notes.unshift(note);
+  const txt=document.getElementById('txBox').value.trim();
+  if (!txt||!selProj) return;
+  const now=new Date();
+  const date=now.toISOString().split('T')[0];
+  const time=now.toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'});
+  const md=document.getElementById('mdBox').textContent;
+  notes.unshift({id:Date.now(),proj:selProj,cls:selCls,text:txt.substring(0,120),md,date,time});
   if (notes.length>200) notes=notes.slice(0,200);
-  try{localStorage.setItem('iv6_notes',JSON.stringify(notes));}catch(e){}
-  updCnt();
+  save(); updCnt();
   navigator.clipboard.writeText(md)
-    .then(()=>showToast('✓ Skopiowano i zapisano w historii!'))
+    .then(()=>showToast('✓ Skopiowano i zapisano!'))
     .catch(()=>showToast('Zapisano w historii'));
 }
-
 function newRec() {
-  resultMap={}; secs=0; selProj=''; selCls='';
+  resultMap={}; audioChunks=[]; secs=0; selProj=''; selCls='';
   document.getElementById('timer').textContent='0:00';
   document.getElementById('timer').classList.remove('paused');
   document.getElementById('postRec').style.display='none';
@@ -536,18 +700,15 @@ function newRec() {
   recState='idle'; updateUI(); setStatus('',false);
 }
 
-// ── Historia ─────────────────────────────────────────────────────────────────
+// ── Historia ──────────────────────────────────────────────────────────────────
 function renderHist() {
-  const list = document.getElementById('histList');
-  const empty = document.getElementById('histEmpty');
-  const toolbar = document.getElementById('histToolbar');
-  if (!notes.length) {
-    list.innerHTML=''; empty.style.display='block'; toolbar.style.display='none';
-    return;
-  }
+  const list=document.getElementById('histList');
+  const empty=document.getElementById('histEmpty');
+  const toolbar=document.getElementById('histToolbar');
+  if (!notes.length) { list.innerHTML=''; empty.style.display='block'; toolbar.style.display='none'; return; }
   empty.style.display='none'; toolbar.style.display='flex';
-  document.getElementById('histCount').textContent = notes.length + ' pomysłów';
-  list.innerHTML = notes.map(n => `
+  document.getElementById('histCount').textContent=notes.length+' pomysłów';
+  list.innerHTML=notes.map(n=>`
     <div class="note-card${selectedIds.has(n.id)?' selected':''}" id="card-${n.id}">
       <div class="note-top">
         <div class="note-check${selectMode?' show':''}${selectedIds.has(n.id)?' checked':''}" onclick="toggleSelect(${n.id})">
@@ -563,63 +724,49 @@ function renderHist() {
       </div>
     </div>`).join('');
 }
-
 function toggleSelectMode() {
-  selectMode = !selectMode;
-  selectedIds.clear();
-  document.getElementById('selectBtn').classList.toggle('active-sel', selectMode);
-  document.getElementById('selectBtn').textContent = selectMode ? 'Anuluj' : 'Zaznacz';
-  document.getElementById('delBar').classList.toggle('show', selectMode);
+  selectMode=!selectMode; selectedIds.clear();
+  document.getElementById('selectBtn').classList.toggle('active-sel',selectMode);
+  document.getElementById('selectBtn').textContent=selectMode?'Anuluj':'Zaznacz';
+  document.getElementById('delBar').classList.toggle('show',selectMode);
   renderHist();
 }
-
 function cancelSelect() {
-  selectMode = false; selectedIds.clear();
-  const btn = document.getElementById('selectBtn');
-  if (btn) { btn.classList.remove('active-sel'); btn.textContent = 'Zaznacz'; }
+  selectMode=false; selectedIds.clear();
+  const btn=document.getElementById('selectBtn');
+  if (btn){btn.classList.remove('active-sel');btn.textContent='Zaznacz';}
   document.getElementById('delBar').classList.remove('show');
 }
-
 function toggleSelect(id) {
-  if (selectedIds.has(id)) selectedIds.delete(id);
-  else selectedIds.add(id);
-  document.getElementById('delBarText').textContent = 'Zaznaczono '+selectedIds.size;
+  if (selectedIds.has(id)) selectedIds.delete(id); else selectedIds.add(id);
+  document.getElementById('delBarText').textContent='Zaznaczono '+selectedIds.size;
   renderHist();
 }
-
 function deleteSelected() {
   if (!selectedIds.size) return;
-  notes = notes.filter(n=>!selectedIds.has(n.id));
-  save(); updCnt(); cancelSelect(); renderHist();
-  showToast('Usunięto zaznaczone');
+  notes=notes.filter(n=>!selectedIds.has(n.id));
+  save(); updCnt(); cancelSelect(); renderHist(); showToast('Usunięto zaznaczone');
 }
-
 function confirmDeleteOne(id) {
   if (confirm('Usunąć tę notatkę?')) {
-    notes = notes.filter(n=>n.id!==id);
-    save(); updCnt(); renderHist();
-    showToast('Usunięto');
+    notes=notes.filter(n=>n.id!==id); save(); updCnt(); renderHist(); showToast('Usunięto');
   }
 }
-
 function confirmDeleteAll() {
-  if (confirm('Usunąć WSZYSTKIE notatki? Tej operacji nie można cofnąć.')) {
-    notes = []; save(); updCnt(); cancelSelect(); renderHist();
-    showToast('Usunięto wszystkie notatki');
+  if (confirm('Usunąć WSZYSTKIE notatki?')) {
+    notes=[]; save(); updCnt(); cancelSelect(); renderHist(); showToast('Usunięto wszystkie');
   }
 }
-
 function copyNote(id) {
-  const n = notes.find(x=>x.id===id);
+  const n=notes.find(x=>x.id===id);
   if (n) navigator.clipboard.writeText(n.md).then(()=>showToast('✓ Skopiowano!')).catch(()=>{});
 }
 
-function save() { try{localStorage.setItem('iv6_notes',JSON.stringify(notes));}catch(e){} }
-function updCnt() { document.getElementById('cnt').textContent=notes.length; }
+function save(){try{localStorage.setItem('iv7_notes',JSON.stringify(notes));}catch(e){}}
+function updCnt(){document.getElementById('cnt').textContent=notes.length;}
 function showErr(msg){const e=document.getElementById('errBox');e.textContent=msg;e.classList.add('on');}
 function setStatus(msg,active){const el=document.getElementById('srStatus');el.textContent=msg;active?el.classList.add('on'):el.classList.remove('on');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400);}
-
 document.getElementById('txBox').addEventListener('input',()=>{if(selProj)buildMd();});
 </script>
 </body>
